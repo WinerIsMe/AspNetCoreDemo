@@ -1,4 +1,6 @@
 ﻿using Demo.Domain.Interfaces;
+using Demo.Infrastruct.Data.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,39 +15,49 @@ namespace Demo.Infrastruct.Data.Repository
     /// <typeparam name="TEntity"></typeparam>
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        public void Add(TEntity obj)
+        protected readonly StudyContext Db;
+        protected readonly DbSet<TEntity> DbSet;
+
+        public Repository(StudyContext context)
         {
-            throw new NotImplementedException();
+            Db = context;
+            DbSet = Db.Set<TEntity>();
         }
 
-        public void Dispose()
+        public virtual void Add(TEntity obj)
         {
-            throw new NotImplementedException();
+            DbSet.Add(obj);
         }
 
-        public IQueryable<TEntity> GetAll()
+        public virtual TEntity GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return DbSet.Find(id);
         }
 
-        public TEntity GetById(Guid id)
+        public virtual IQueryable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return DbSet;
         }
 
-        public void Remove(Guid id)
+        public virtual void Update(TEntity obj)
         {
-            throw new NotImplementedException();
+            DbSet.Update(obj);
+        }
+
+        public virtual void Remove(Guid id)
+        {
+            DbSet.Remove(DbSet.Find(id));
         }
 
         public int SaveChanges()
         {
-            throw new NotImplementedException();
+            return Db.SaveChanges();
         }
 
-        public void Update(TEntity obj)
+        public void Dispose()
         {
-            throw new NotImplementedException();
+            Db.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
