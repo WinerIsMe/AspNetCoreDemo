@@ -34,9 +34,11 @@ namespace Equinox.Services.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // WebAPI Config
+            // 注册接口映射服务，可以直接发现所有的继承了 ApiController 类的实现
             services.AddControllers();
 
             // Setting DBContexts
+            // 添加数据库框架相关的功能配置（目前使用的时EF框架）
             services.AddDatabaseConfiguration(Configuration);
 
             // ASP.NET Identity Settings & JWT
