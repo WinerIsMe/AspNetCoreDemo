@@ -1,7 +1,9 @@
 ﻿using Demo.Domain.Core.Bus;
 using Demo.Domain.Core.Commands;
+using Demo.Domain.Core.Events;
 using MediatR;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +12,22 @@ using System.Threading.Tasks;
 namespace Demo.Infrastruct.Data.Bus
 {
     /// <summary>
-    /// 一个密封类，实现我们的中介记忆总线
+    /// 一个密封类，实现我们的中介内存总线
     /// </summary>
     public sealed class InMemoryBus : IMediatorHandler
     {
         //构造函数注入
         private readonly IMediator _mediator;
+        //注入服务工厂
+        private readonly ServiceFactory _serviceFactory;
+        private static readonly ConcurrentDictionary<Type, object> _requestHandlers = new ConcurrentDictionary<Type, object>();
+        // 事件仓储服务
+        private readonly IEventStoreService _eventStoreService;
 
-        public InMemoryBus(IMediator mediator)
+        public InMemoryBus(IMediator mediator, ServiceFactory serviceFactory)
         {
             _mediator = mediator;
+            _serviceFactory = serviceFactory;
         }
 
         /// <summary>
@@ -31,7 +39,27 @@ namespace Demo.Infrastruct.Data.Bus
         /// <returns></returns>
         public Task SendCommand<T>(T command) where T : Command
         {
-            return _mediator.Send(command);//这里要注意下 command 对象
+            //这个是正确的
+            return _mediator.Send(command);//请注意 入参 的类型
+
+            //注意！这个仅仅是用来测试和研究源码的，请开发的时候不要使用这个
+            //return Send(command);//请注意 入参 的类型
+        }
+
+        /// <summary>
+        /// 引发事件的实现方法
+        /// </summary>
+        /// <typeparam name="T">泛型 继承 Event：INotification</typeparam>
+        /// <param name="event">事件模型，比如StudentRegisteredEvent</param>
+        /// <returns></returns>
+        public Task RaiseEvent<T>(T @event) where T : Event
+        {
+            // 除了领域通知以外的事件都保存下来
+            if (!@event.MessageType.Equals("DomainNotification"))
+                _eventStoreService?.Save(@event);
+
+            // MediatR中介者模式中的第二种方法，发布/订阅模式
+            return _mediator.Publish(@event);
         }
 
     }

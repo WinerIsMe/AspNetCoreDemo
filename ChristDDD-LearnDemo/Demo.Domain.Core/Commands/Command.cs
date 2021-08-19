@@ -1,7 +1,7 @@
-﻿using MediatR;
+﻿using FluentValidation.Results;
+using MediatR;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ namespace Demo.Domain.Core.Commands
     /// <summary>
     /// 抽象命令基类
     /// </summary>
-    public abstract class Command : IRequest
+    public abstract class Command : IRequest<bool>
     {
         //时间戳
         public DateTime Timestamp { get; private set; }

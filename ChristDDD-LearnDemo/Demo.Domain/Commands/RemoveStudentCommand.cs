@@ -21,7 +21,7 @@ namespace Demo.Domain.Commands
 
         public override bool IsValid()
         {
-            var ValidationResult = new RemoveStudentCommandValidation().Validate(this);
+            ValidationResult = new RemoveStudentCommandValidation().Validate(this);
             return ValidationResult.IsValid;
         }
     }

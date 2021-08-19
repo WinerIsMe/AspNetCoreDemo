@@ -29,7 +29,7 @@ namespace Demo.Domain.Commands
 
         public override bool IsValid()
         {
-            var ValidationResult = new UpdateStudentCommandValidation().Validate(this);
+            ValidationResult = new UpdateStudentCommandValidation().Validate(this);
             return ValidationResult.IsValid;
         }
     }
