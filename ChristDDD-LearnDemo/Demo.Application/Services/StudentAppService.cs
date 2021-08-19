@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Demo.Application.Interfaces;
 using Demo.Application.ViewModels;
+using Demo.Domain.Commands;
+using Demo.Domain.Core.Bus;
 using Demo.Domain.Interfaces;
 using Demo.Domain.Models;
 using System;
@@ -25,20 +27,26 @@ namespace Demo.Application.Services
             private readonly IStudentRepository _StudentRepository;
             //用来进行DTO
             private readonly IMapper _mapper;
+            //中介者 总线
+            private readonly IMediatorHandler Bus;
 
             public StudentAppService(
                 IStudentRepository StudentRepository,
+                IMediatorHandler bus,
                 IMapper mapper
                 )
             {
                 _StudentRepository = StudentRepository;
                 _mapper = mapper;
+                Bus = bus;
             }
 
             public IEnumerable<StudentViewModel> GetAll()
             {
-                //第一种写法 Map           
-                return _mapper.Map<IEnumerable<StudentViewModel>>(_StudentRepository.GetAll());            
+                //第一种写法 Map      
+                var aa = _StudentRepository.GetAll();
+                var bb = _mapper.Map<IEnumerable<StudentViewModel>>(aa);
+                return _mapper.Map<IEnumerable<StudentViewModel>>(_StudentRepository.GetAll());
                 //第二种写法 ProjectTo           
                 //return (_StudentRepository.GetAll()).ProjectTo<StudentViewModel>(_mapper.ConfigurationProvider);
             }
@@ -51,8 +59,12 @@ namespace Demo.Application.Services
             public void Register(StudentViewModel StudentViewModel)
             {
                 //判断是否为空等等 还没有实现
+                //_StudentRepository.Add(_mapper.Map<Student>(StudentViewModel));
+                //_StudentRepository.SaveChanges();
 
-                _StudentRepository.Add(_mapper.Map<Student>(StudentViewModel));
+                // 使用中介者模式
+                var registerCommand = _mapper.Map<RegisterStudentCommand>(StudentViewModel);
+                Bus.SendCommand(registerCommand);
             }
 
             public void Update(StudentViewModel StudentViewModel)

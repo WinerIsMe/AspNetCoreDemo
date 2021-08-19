@@ -1,7 +1,4 @@
 {
-  "ConnectionStrings": {
-    "DefaultConnection": "server=localhost;uid=sa;pwd=123456;database=EDU"
-  },
   "Logging": {
     "IncludeScopes": false,
     "LogLevel": {

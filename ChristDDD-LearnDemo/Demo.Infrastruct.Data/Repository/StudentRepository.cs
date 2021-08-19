@@ -1,11 +1,8 @@
 ﻿using Demo.Domain.Interfaces;
 using Demo.Domain.Models;
 using Demo.Infrastruct.Data.Context;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Demo.Infrastruct.Data.Repository
 {
@@ -22,7 +19,7 @@ namespace Demo.Infrastruct.Data.Repository
         //对特例接口进行实现
         public Student GetByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            return DbSet.AsNoTracking().FirstOrDefault(c => c.Email == email);
         }
     }
 }

@@ -29,8 +29,40 @@ namespace Demo.Application.ViewModels
 
         [Required(ErrorMessage = "The BirthDate is Required")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
+        [DataType(DataType.Date, ErrorMessage = "Date in invalid format")]
         [DisplayName("Birth Date")]
         public DateTime BirthDate { get; set; }
+
+
+        [Required(ErrorMessage = "The Phone is Required")]
+        [Phone]
+        //[Compare("ConfirmPhone")]
+        [DisplayName("Phone")]
+        public string Phone { get; set; }
+
+
+        //public AddressViewModel Address { get; set; }
+
+        /// <summary>
+        /// 省份
+        /// </summary>
+        [Required(ErrorMessage = "The Province is Required")]
+        [DisplayName("Province")]
+        public string Province { get; set; }
+
+        /// <summary>
+        /// 城市
+        /// </summary>
+        public string City { get; set; }
+
+        /// <summary>
+        /// 区县
+        /// </summary>
+        public string County { get; set; }
+
+        /// <summary>
+        /// 街道
+        /// </summary>
+        public string Street { get; set; }
     }
 }

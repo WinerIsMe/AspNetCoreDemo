@@ -24,8 +24,9 @@ namespace Demo.Infrastruct.Data.Context
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //对 StudentMap 进行配置
             modelBuilder.ApplyConfiguration(new StudentMap());
-
+                        
             base.OnModelCreating(modelBuilder);
         }
 
@@ -41,8 +42,11 @@ namespace Demo.Infrastruct.Data.Context
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            // 定义要使用的数据库
+            //定义要使用的数据库
+            //正确的是这样，直接连接字符串即可
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            //我是读取的文件内容，为了数据安全
+            //optionsBuilder.UseSqlServer(File.ReadAllText(config.GetConnectionString("DefaultConnection")));
         }
     }
 }
