@@ -10,10 +10,10 @@ namespace Demo.Domain.Models
     /// <summary>
     /// 定义领域对象 Customer
     /// </summary>
-    public class Customer
+    public class Student
     {
-        protected Customer() { }
-        public Customer(Guid id, string name, string email, DateTime birthDate)
+        protected Student() { }
+        public Student(Guid id, string name, string email, DateTime birthDate)
         {
             Id = id;
             Name = name;

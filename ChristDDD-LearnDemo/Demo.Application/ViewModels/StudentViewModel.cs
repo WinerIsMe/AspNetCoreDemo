@@ -11,7 +11,7 @@ namespace Demo.Application.ViewModels
     /// <summary>
     /// 子领域Customer的视图模型
     /// </summary>
-    public class CustomerViewModel
+    public class StudentViewModel
     {
         [Key]
         public Guid Id { get; set; }
