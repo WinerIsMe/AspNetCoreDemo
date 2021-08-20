@@ -11,7 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Infrastruct.Data", "De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Application", "Demo.Application\Demo.Application.csproj", "{92C31F03-B368-42F6-B5F2-0523C8E9A09F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Domain.Core", "Demo.Domain.Core\Demo.Domain.Core.csproj", "{CCBD664C-E331-470F-AA1F-555E3681995C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Domain.Core", "Demo.Domain.Core\Demo.Domain.Core.csproj", "{CCBD664C-E331-470F-AA1F-555E3681995C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.表现层", "1.表现层", "{358D6A7D-53DA-4FEA-BC0C-21A1538A98A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 应用层", "2 应用层", "{55AF77DD-EF69-4634-8C20-CE09238405B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 领域层", "3 领域层", "{82EF11F9-B021-44DF-A2F1-4273D7ECA177}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 基础层", "4 基础层", "{D57325B2-4BB5-47F5-BA77-17C725F9FFFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +50,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1D001EF1-66E1-4735-A703-9AD0CA91B0EF} = {358D6A7D-53DA-4FEA-BC0C-21A1538A98A0}
+		{1EB10432-F637-4621-857B-F5A25D8B2231} = {82EF11F9-B021-44DF-A2F1-4273D7ECA177}
+		{87B97A09-B7EA-4C29-A81B-1555F2B03FD5} = {D57325B2-4BB5-47F5-BA77-17C725F9FFFA}
+		{92C31F03-B368-42F6-B5F2-0523C8E9A09F} = {55AF77DD-EF69-4634-8C20-CE09238405B6}
+		{CCBD664C-E331-470F-AA1F-555E3681995C} = {82EF11F9-B021-44DF-A2F1-4273D7ECA177}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4CCAB1D-849F-4D5B-9E3D-0858EAB6E63F}

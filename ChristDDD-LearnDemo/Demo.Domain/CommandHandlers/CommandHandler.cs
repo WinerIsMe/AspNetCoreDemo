@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FluentValidation.Results;
+using Demo.Domain.Core.Notifications;
 
 namespace Demo.Domain.CommandHandlers
 {
@@ -44,14 +45,12 @@ namespace Demo.Domain.CommandHandlers
             List<string> errorInfo = new List<string>();
             foreach (var error in message.ValidationResult.Errors)
             {
-                errorInfo.Add(error.ErrorMessage);
-
+                //errorInfo.Add(error.ErrorMessage);      
                 //将错误信息提交到事件总线，派发出去
-                //_bus.RaiseEvent(new DomainNotification("", error.ErrorMessage));
+                _bus.RaiseEvent(new DomainNotification("", error.ErrorMessage));
             }
-
             //将错误信息收集一：缓存方法（错误示范）
-            _cache.Set("ErrorData", errorInfo);
+            //_cache.Set("ErrorData", errorInfo);
         }
 
         //工作单元提交

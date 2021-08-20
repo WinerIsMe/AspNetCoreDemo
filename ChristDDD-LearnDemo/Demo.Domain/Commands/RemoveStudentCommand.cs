@@ -16,7 +16,6 @@ namespace Demo.Domain.Commands
         public RemoveStudentCommand(Guid id)
         {
             Id = id;
-            //AggregateId = id;
         }
 
         public override bool IsValid()

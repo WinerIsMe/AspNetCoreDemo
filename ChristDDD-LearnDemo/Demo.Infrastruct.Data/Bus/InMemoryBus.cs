@@ -24,10 +24,11 @@ namespace Demo.Infrastruct.Data.Bus
         // 事件仓储服务
         private readonly IEventStoreService _eventStoreService;
 
-        public InMemoryBus(IMediator mediator, ServiceFactory serviceFactory)
+        public InMemoryBus(IMediator mediator, ServiceFactory serviceFactory, IEventStoreService eventStoreService)
         {
             _mediator = mediator;
             _serviceFactory = serviceFactory;
+            _eventStoreService = eventStoreService;
         }
 
         /// <summary>

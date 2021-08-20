@@ -69,7 +69,10 @@ namespace Demo.Application.Services
 
             public void Update(StudentViewModel StudentViewModel)
             {
-                _StudentRepository.Update(_mapper.Map<Student>(StudentViewModel));
+                //_StudentRepository.Update(_mapper.Map<Student>(StudentViewModel));
+                // 使用中介者模式
+                var registerCommand = _mapper.Map<UpdateStudentCommand>(StudentViewModel);
+                Bus.SendCommand(registerCommand);
 
             }
 
